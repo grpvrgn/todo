@@ -1,0 +1,54 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+   
+}
+form {
+    display: flex;
+    gap: 10px;
+}
+input {
+    width: 500px;
+    height: 36px;
+    border: 2px solid #6C63FF;
+    border-radius: 5px;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; gap: 10px;
+}
+
+select {
+    background-color: #6C63FF;
+    width: 85px;
+    height: 38px;
+    color: aliceblue;
+    text-align: center;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    background-color: #6C63FF;
+    width: 38px;
+    height: 38px;
+    color: aliceblue;
+    text-align: center;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.moon{
+    width: 22px;
+    height: 22px;
+}
