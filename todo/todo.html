@@ -7,29 +7,61 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>TODO</h1>
-    <form> 
+    <div class="container">
+        <header>
+    <h1>TODO LIST</h1>
+</header>
+<form> 
  <input type="search" placeholder="search note...">
- <select name="" id="">
-    <option value="">ALL</option>
-    <option>Complete</option>
-    <option>Incomplete</option>
+ <select class="menu" id="btn_all">
+    <option value="">все</option>
+    <option>активные</option>
+    <option>выполненные</option>
 
  </select>
   <div class="fon">
-    <button><img class="moon" src="Vector.png"></button>
+                <button id="theme-toggle" class="theme-toggle">
+            <span class="theme-icon">🌙</span>
+        </button>
+
   </div>
+
+
 </form>
 
   </DIV>
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Добавить новую задачу</h2>
-      <input type="text" id="new-task-input" placeholder="Название задачи">
-      <button id="submit-task">Добавить</button>
+   <ul class="todo-list">
+      <li>
+        <input type="checkbox" id="note1">
+        <label for="note1">NOTE #1</label>
+      </li>
+      <li class="completed">
+        <input type="checkbox" id="note2" checked>
+        <label for="note2">NOTE #2</label>
+      </li>
+      <li>
+        <input type="checkbox" id="note3">
+        <label for="note3">NOTE #3</label>
+      </li>
+    </ul>
+
+    
+    <button class="add-task-btn">+</button>
+  </div>
+
+ <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Новая заметка</h2>
+            <input type="text" id="noteInput" placeholder="Введите вашу заметку">
+            <button id="apply">Применить</button>
+            <button id="cancel">Отмена</button>
+        </div>
+    </div>
+
+
     </div>
   </div>
-</div>
+</DIV>
 </body>
 </html>
