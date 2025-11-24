@@ -52,274 +52,89 @@
         </div>
     </div>
 <script>
-    * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-}
+   const addTaskBtn = document.querySelector(".add-task-btn");
+const modal = document.getElementById("modal");
+const closeModal = document.getElementById("cancel");
 
-body {
-  transition: background-color 0.3s, color 0.3s;
-  background: #f9f9fb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+addTaskBtn.onclick = function () {
+  modal.style.display = "block";
+};
 
+closeModal.onclick = function () {
+  modal.style.display = "none";
+};
 
-.light-theme {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-.dark-theme{
-    background-color: #121212;
-    color: #ffffff;
-}
-
-.container.light-theme {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-.container.dark-theme{
-    background-color: #121212;
-    color: #ffffff;
-}
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
 
 
-.container {
-  padding: 40px;
-  z-index: 1;
-  border-radius: 12px;
-  width: 750px;
-  height: 710px;
-  text-align: center;
-  position: relative;
-}
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-}
+const checkboxes = document.querySelectorAll('.todo-list input[type="checkbox"]');
 
-.search-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 30px;
-}
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const label = this.nextElementSibling; 
 
-.search-bar input {
-  width: 450px;
-  padding: 8px 10px;
-  border: 2px solid #b5b5e0;
-  border-radius: 6px;
-  outline: none;
-  font-size: 14px;
-}
-
-.search-btn {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 18px;
-  margin-left: -36px;
-}
-
-.filter {
-  width: 85px;
-  height: 38px;
-  padding: 8px 12px;
-  border: none;
-  background: #7a6fff;
-  color: white;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-#theme-toggle {
-  width: 38px;
-  height: 38px;
-  border: none;
-  background: #7a6fff;;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 8px;
-  font-size: 16px;
-}
-
-.add-task-btn {
-  display: flex;
-  margin-left: 600px;
-  margin-top: 350px;
-    width: 50px;
-    height: 50px;
-     color: white ;
-box-shadow: 3px 10px 80px 3px rgba(108, 99, 255,0.92 );
-  border: none;
-  background: #6C63FF;
-  border-radius: 60px;
-  cursor: pointer;
-  padding: 8px;
-  font-size: 26px;
-  justify-content: center;
-  align-items: center;
-}
-
-.todo-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  list-style: none;
-  margin-top: 30px;
-  text-align: left;
-}
-
-.todo-list li {
-  width: 380px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(108, 99, 255, 1);
-}
-
-.todo-list input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: #7a6fff;
-}
-
-.todo-list label {
-  font-size: 16px;
-  color: #333;
-  display: inline-block;
-}
+        if (this.checked) {
+            label.classList.add('strike'); 
+        } else {
+            label.classList.remove('strike');
+        }
+    });
+});
 
 
-.todo-list li label {
-    color: #333; 
-}
+const themeToggle = document.getElementById("theme-toggle");
+themeToggle.onclick = function () {
+  document.body.classList.toggle("dark-theme");
+  document.body.classList.toggle("light-theme");
+};
 
 
-.dark-theme .todo-list li label {
-    color: #fff; 
-}
-.dark-theme .search-bar input {
-    background: #121212; 
-    color: #fff; 
-    border: 1px solid #808080; 
-}
+const input = document.getElementById("noteInput");
+const button = document.getElementById("apply");
+const ul = document.getElementsByClassName("todo-list");
+button.addEventListener("click", () => {
+  const new_note_elem = document.createElement("li");
+  const note_checkbox = document.createElement("input");
+  const note_span = document.createElement("span");
+  new_note_elem.classList.add("note");
+  note_checkbox.setAttribute("type", "checkbox");
+  note_span.innerText = input.value;
+  new_note_elem.appendChild(note_checkbox);
+  new_note_elem.appendChild(note_span);
 
-.strike {
-    text-decoration: line-through;
-    color: #aaa !important;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #252525B2;
-  animation: fadeIn 0.3s;
-}
-
-.modal-content {
-  background-color:#F7F7F7;
-  margin: 15% auto;
-  padding: 20px;
-  width: 500px;
-  height: 289px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 20px var(--shadow);
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: #000;
-}
-
-#noteInput {
-  width: 100%;
-  padding: 10px;
-  margin: 15px 0;
-  border: 1px solid #7a6fff ;
-  border-radius: 6px;
-
-  color: var(--text);
-}
-
-#apply, #cancel {
-
-  padding: 12px 16px;
-  margin: 5px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-#apply {
-display: flex;
-position: absolute;
-  margin-top: 110px;
-  background: none;
-  color: rgb(0, 0, 0);
-  border: 1px solid #7a6fff ;
-}
-
-#cancel {
-  display: flex;
-position: absolute;
-margin-top: 115px;
-margin-left: 373px;
-  background: none;
-  border: 1px solid #7a6fff ;
-  color: #000000;
-}
+  ul[0].appendChild(new_note_elem);
+});
 
 
-#apply:hover{
-  background:#7a6fff ;
-}
-#cancel:hover{
-  background:#7a6fff ;
-}
 
-.edit-btn{
-    margin-left: 250px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-}
-.delete-btn{
-    margin-right: 100px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-}
+
+const menu = document.querySelectorAll(".filter");
+
+menu[0].addEventListener("change", (e) => {
+    console.log(e.target.value);
+    const task_list = document.querySelectorAll(".todo-list>li");
+    console.log(task_list);
+let flag= e.target.value;
+    for (let i = 0; i < task_list.length; i++) {
+
+      let cb = task_list[i].childNodes[1];
+      console.log(cb, cb.checked);
+      task_list[i].style.display="flex";
+      if(flag == "all") continue
+      if(cb.checked){
+         task_list[i].style.display=(flag =="active")?"none":"flex";
+      }
+      else{
+         task_list[i].style.display=(flag =="active")?"flex":"none";
+      }
+
+    }
+  });
 </script>
 </body>
 </html>
